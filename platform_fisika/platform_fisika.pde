@@ -10,7 +10,7 @@ color white=#FFFFFF;
 color orange=#F0A000;
 color brown=#996633;
 PImage map;
-int gridSize=32;
+int gridSize=10;
 boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey;
 FWorld world ;
 FPlayer player;
@@ -22,6 +22,8 @@ void setup() {
   loadPlayer();
 }
 void loadWorld(PImage img) {
+
+
   world=new FWorld(-2000, -2000, 2000, 2000);
   world.setGravity(0, 900);
   map=loadImage("map.png");
@@ -30,7 +32,7 @@ void loadWorld(PImage img) {
       color c=map.get(x, y);
       if (c==black) {
         FBox b=new FBox(gridSize, gridSize);
-        b.setPosition(x*gridSize, 0*gridSize);
+        b.setPosition(x*gridSize, y*gridSize);
         b.setStatic(true);
         world.add(b);
       }
@@ -44,4 +46,12 @@ void loadPlayer() {
 void draw() {
   world.step();
   world.draw();
+  player.act();
+}
+void drawWorld() {
+  pushMatrix();
+  translate(-player.getX()+width/2, player.getY()+height/2);
+  world.step();
+  world.draw();
+  popMatrix();
 }
