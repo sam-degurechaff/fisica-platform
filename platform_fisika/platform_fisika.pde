@@ -3,6 +3,7 @@ import fisica.*;
 
 float zoom=1.5;
 color black=#000000;
+color gray=#DEDEDE;
 color green=#00FF00;
 color red=#FF0000;
 color blue=#0000FF;
@@ -10,11 +11,15 @@ color white=#FFFFFF;
 color orange=#F0A000;
 color brown=#099662;
 color dice = #0fffff;
-PImage map, stone, ice, treeTrunk, img;
+color ttgreen=#58FF00;
+color ttigreen=#58ff01;
+PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi;
 int gridSize=28;
-boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey;
+boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey ;
 FWorld world ;
 FPlayer player;
+
+
 void setup() {
   size(600, 600);
   Fisica.init(this);
@@ -24,7 +29,12 @@ void setup() {
 }
 void loadWorld(PImage img) {
 
-
+  stone = loadImage("brick.png");
+  treeTrunk = loadImage("tree_trunk.png");
+  ice = loadImage("blueBlock.png");
+  spike=loadImage("spike.png");
+  treetopc=loadImage("treetop_center.png");
+  treetopi=loadImage("tree_intersect.png");
   world=new FWorld(-2000, -2000, 2000, 2000);
   world.setGravity(0, 900);
 
@@ -34,7 +44,7 @@ void loadWorld(PImage img) {
       FBox b=new FBox(gridSize, gridSize);
       b.setPosition(x*gridSize, y*gridSize);
       b.setStatic(true);
-      if (c==black) {
+      if (c==gray) {
         b.attachImage(stone);
         b.setFriction(4);
         b.setName("stone");
@@ -51,6 +61,24 @@ void loadWorld(PImage img) {
         b.setFriction(4);
         b.setSensor(true);
         b.setName("tree trunk");
+        world.add(b);
+      }
+      if (c==red) {
+        b.attachImage(spike);
+        b.setSensor(true);
+        b.setName("spike");
+        world.add(b);
+      }
+      if (c==ttgreen) {
+        b.attachImage(treetopc);
+
+        b.setName("treetopc");
+        world.add(b);
+      }
+      if (c==ttigreen) {
+        b.attachImage(treetopi);
+
+        b.setName("treetopci");
         world.add(b);
       }
       if (c==black) {
