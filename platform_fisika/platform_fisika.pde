@@ -13,15 +13,17 @@ color brown=#099662;
 color dice = #0fffff;
 color ttgreen=#58FF00;
 color ttigreen=#58ff01;
-PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi;
+color bridgered=#8B1616;
+PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, bridge;
 int gridSize=28;
 boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey ;
 FWorld world ;
 FPlayer player;
-
+ArrayList<FGameObject>terrain;
 
 void setup() {
   size(600, 600);
+  terrain=new ArrayList<FGameObject>();
   Fisica.init(this);
   map=loadImage("map2.png");
   loadWorld(map);
@@ -35,6 +37,7 @@ void loadWorld(PImage img) {
   spike=loadImage("spike.png");
   treetopc=loadImage("treetop_center.png");
   treetopi=loadImage("tree_intersect.png");
+  bridge=loadImage("bridge_center.png");
   world=new FWorld(-2000, -2000, 2000, 2000);
   world.setGravity(0, 900);
 
@@ -87,6 +90,13 @@ void loadWorld(PImage img) {
         b.setStatic(true);
         world.add(b);
       }
+      if (c==bridgered) {
+        FBridge br=new FBridge(x*gridSize, y*gridSize);
+        b.attachImage(bridge);
+        terrain.add(br);
+        b.setName("bridge");
+        world.add(b);
+      }
     }
   }
 }
@@ -100,7 +110,16 @@ void draw() {
   //world.draw();
   player.act();
   drawWorld();
+  actWorld();
   println(player.getX(), player.getY());
+}
+
+void actWorld() {
+  player.act();
+  for (int i=0; i<terrain.size(); i++) {
+    FGameObject t=terrain.get(i);
+    t.act();
+  }
 }
 void drawWorld() {
   pushMatrix();
