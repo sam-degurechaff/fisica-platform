@@ -92,10 +92,8 @@ void loadWorld(PImage img) {
       }
       if (c==bridgered) {
         FBridge br=new FBridge(x*gridSize, y*gridSize);
-        b.attachImage(bridge);
         terrain.add(br);
-        b.setName("bridge");
-        world.add(b);
+        world.add(br);
       }
     }
   }
@@ -111,7 +109,7 @@ void draw() {
   player.act();
   drawWorld();
   actWorld();
-  println(player.getX(), player.getY());
+  //println(player.getX(), player.getY());
 }
 
 void actWorld() {
