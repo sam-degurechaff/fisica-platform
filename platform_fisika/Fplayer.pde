@@ -20,6 +20,8 @@ class FPlayer extends FGameObject {
     if (dkey)setVelocity(500, vy);
     //  if (wkey)setVelocity(vx, -500);
     if (skey)setVelocity(vx, 100);
+    if (jph==true) setVelocity(vx, -900);
+    if (de==true)setPosition(30, 0);
   }
   void checkForCollisions() {
     ArrayList<FContact>contacts=getContacts();

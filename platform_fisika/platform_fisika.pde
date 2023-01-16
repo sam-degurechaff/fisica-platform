@@ -14,12 +14,15 @@ color dice = #0fffff;
 color ttgreen=#58FF00;
 color ttigreen=#58ff01;
 color bridgered=#8B1616;
-PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, bridge;
+color trampolineblue=#00CAE3;
+color lavared=#D61500;
+PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, lava1, bridge, trampoline;
 int gridSize=28;
-boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey ;
+boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey, jph, de;
 FWorld world ;
 FPlayer player;
 ArrayList<FGameObject>terrain;
+PImage[] lava = new PImage[6];
 
 void setup() {
   size(600, 600);
@@ -38,7 +41,15 @@ void loadWorld(PImage img) {
   treetopc=loadImage("treetop_center.png");
   treetopi=loadImage("tree_intersect.png");
   bridge=loadImage("bridge_center.png");
-  world=new FWorld(-2000, -2000, 2000, 2000);
+  trampoline=loadImage("trampoline.png");
+
+  lava[0] = loadImage( "lava1.png" );
+  lava[1] = loadImage( "lava2.png" );
+  lava[2] = loadImage( "lava3.png" );
+  lava[3] = loadImage( "lava4.png" );
+  lava[4] = loadImage( "lava5.png" );
+  lava[5]=loadImage("lava0.png");
+  world=new FWorld(-1000, -1000, 3000, 3000);
   world.setGravity(0, 900);
 
   for (int y=0; y<map.width; y++) {
@@ -92,6 +103,16 @@ void loadWorld(PImage img) {
       }
       if (c==bridgered) {
         FBridge br=new FBridge(x*gridSize, y*gridSize);
+        terrain.add(br);
+        world.add(br);
+      }
+      if (c==trampolineblue) {
+        FTrampoline br=new FTrampoline(x*gridSize, y*gridSize);
+        terrain.add(br);
+        world.add(br);
+      }
+      if (c==lavared) {
+        FLava br=new FLava(x*gridSize, y*gridSize);
         terrain.add(br);
         world.add(br);
       }
