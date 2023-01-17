@@ -7,10 +7,20 @@ class FPlayer extends FGameObject {
     setFillColor(red);
   }
   void act() {
+   
+    collisions();
+    animate();
     handleInput();
     checkForCollisions();
     if (isTouching("spike")) {
       setPosition(0, 0);
+    }
+  }
+  void animate() {
+    if (frame>=action.length)frame=0;
+    if (frameCount%5==0) {
+      attachImage(action[frame]);
+      frame++;
     }
   }
   void handleInput() {
