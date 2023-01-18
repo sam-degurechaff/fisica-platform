@@ -23,7 +23,7 @@ FWorld world ;
 FPlayer player;
 ArrayList<FGameObject>terrain;
 PImage[] lava = new PImage[6];
-int frames, f;
+int f;
 PImage[] idle;
 PImage[] jump;
 PImage[] run;
@@ -57,17 +57,17 @@ void loadWorld(PImage img) {
   lava[3] = loadImage( "lava4.png" );
   lava[4] = loadImage( "lava5.png" );
   lava[5]=loadImage("lava0.png");
-  
-  idle =new PImage[2];
-idle[0]=loadImage("idle0");
-idle[0]=loadImage("idle1");
-jump =new PImage[1];
-idle[0]=loadImage("jump0");
-run =new PImage[3];
-idle[0]=loadImage("idle0");
-idle[0]=loadImage("idle1");
-idle[0]=loadImage("idle2");
 
+  idle =new PImage[2];
+  idle[0]=loadImage("idle0.png");
+  idle[1]=loadImage("idle1.png");
+  jump =new PImage[1];
+  jump[0]=loadImage("jump0.png");
+  run =new PImage[3];
+  run[0]=loadImage("runright0.png");
+  run[1]=loadImage("runright1.png");
+  run[2]=loadImage("runright2.png");
+  action=idle;
   world=new FWorld(-1000, -1000, 3000, 3000);
   world.setGravity(0, 900);
 
