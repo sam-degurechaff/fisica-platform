@@ -1,31 +1,26 @@
-class FPlayer extends FGameObject {
-  int frame, direction;
-  final int L=-1;
-  final int R=1;
-  FPlayer() {
+class FGoomba extends FGameObject {
+  int direction=L;
+  int speed=50;
+  int frame=0;
+  FGoomba(float x, float y) {
     super();
-    direction=R;
-    setPosition(300, 0);
-    setName("player");
+    setPosition(x, y);
+    setName("goomba");
     setRotatable(false);
-    setFillColor(red);
+    attachImage(goomba[frameCount%2]);
   }
   void act() {
-
-
+    attachImage( goomba[frameCount%2]);
     animate();
-    handleInput();
     checkForCollisions();
-    if (isTouching("spike")) {
-      setPosition(0, 0);
-    }
+    move();
   }
   void animate() {
     println("a");
     if (frame>=action.length)frame=0;
     if (frameCount%5==0) {
-      if (direction==R) attachImage(action[frame]);
-      if (direction==L)  attachImage(reverseImage(action[frame]));
+      if (direction==R) attachImage(goomba[frame]);
+      if (direction==L)  attachImage(reverseImage(goomba[frame]));
       frame++;
     }
   }
@@ -60,11 +55,15 @@ class FPlayer extends FGameObject {
     for (int i=0; i<contacts.size(); i++) {
       FContact fc =contacts.get(i);
 
-      if (fc.contains("spike")) {
+      if (fc.contains("wall")) {
 
-        setPosition(5, 0);
-        setVelocity(0, 0);
+        direction*=-1;
+        setPosition(getX()+direction, getY());
       }
     }
+  }
+  void move() {
+    float vy=getVelocityY();
+    setVelocity(speed*direction, vy);
   }
 }
