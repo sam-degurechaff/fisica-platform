@@ -10,55 +10,39 @@ class FGoomba extends FGameObject {
     attachImage(goomba[frameCount%2]);
   }
   void act() {
-    attachImage( goomba[frameCount%2]);
+    //attachImage( goomba[frameCount%2]);
     animate();
     checkForCollisions();
     move();
   }
   void animate() {
-    println("a");
-    if (frame>=action.length)frame=0;
+    //println(frame);
+    if (frame>=goomba.length)frame=0;
     if (frameCount%5==0) {
       if (direction==R) attachImage(goomba[frame]);
-      if (direction==L)  attachImage(reverseImage(goomba[frame]));
+      else  attachImage(reverseImage(goomba[frame]));
       frame++;
     }
   }
-  void handleInput() {
-    float vy=getVelocityY();
-    float vx=getVelocityX();
-    if (abs(vy)<.1)action=idle;
-    if (akey) {
-      action=run;
-      setVelocity(-500, vy);
-      direction=L;
-    }
-    if (dkey) {
-      action=run;
-      setVelocity(500, vy);
-      direction=R;
-    }
-    //  if (wkey)setVelocity(vx, -500);
-    if (skey)setVelocity(vx, 100);
 
-    if (wkey) {
-      action=jump;
-      setVelocity(vx, -500);
-    }
-
-    if (abs(vy)>.1)action=jump;
-    if (jph==true) setVelocity(vx, -900);
-    if (de==true)setPosition(30, 0);
-  }
   void checkForCollisions() {
     ArrayList<FContact>contacts=getContacts();
     for (int i=0; i<contacts.size(); i++) {
       FContact fc =contacts.get(i);
 
       if (fc.contains("wall")) {
-
-        direction*=-1;
+        direction=direction*-1;
         setPosition(getX()+direction, getY());
+        break;
+      }
+      if (fc.contains("player")) {
+        if (player.getY()<getY()-gridSize/2) {
+          world.remove(this);
+          enemies.remove(this);
+          player.setVelocity(player.getVelocityX(), -300);
+        } else {
+          player.setPosition(0, 0);
+        }
       }
     }
   }

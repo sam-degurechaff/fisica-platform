@@ -17,6 +17,7 @@ color bridgered=#8B1616;
 color trampolineblue=#00CAE3;
 color lavared=#D61500;
 color gumbayellow=#FADD00;
+color wallgray=#797979;
 
 PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, lava1, bridge, trampoline, gmb;
 int gridSize=28;
@@ -92,6 +93,12 @@ void loadWorld(PImage img) {
         b.attachImage(stone);
         b.setFriction(4);
         b.setName("stone");
+        world.add(b);
+      }
+      if (c==wallgray) {println("b");
+        b.attachImage(stone);
+        b.setFriction(4);
+        b.setName("wall");
         world.add(b);
       }
       if (c==dice) {
