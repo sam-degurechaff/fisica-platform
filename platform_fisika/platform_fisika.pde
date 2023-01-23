@@ -18,8 +18,9 @@ color trampolineblue=#00CAE3;
 color lavared=#D61500;
 color gumbayellow=#FADD00;
 color wallgray=#797979;
+color tbgreen=#87FF00;
 
-PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, lava1, bridge, trampoline, gmb;
+PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, lava1, bridge, trampoline, gmb, thwomp;
 int gridSize=28;
 boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey, jph, de;
 FWorld world ;
@@ -33,6 +34,7 @@ PImage[] jump;
 PImage[] run;
 PImage[] action;
 PImage[]goomba=new PImage[2];
+PImage[]Tb=new PImage[2];
 
 
 
@@ -57,7 +59,7 @@ void loadWorld(PImage img) {
   treetopi=loadImage("tree_intersect.png");
   bridge=loadImage("bridge_center.png");
   trampoline=loadImage("trampoline.png");
-
+ 
   lava[0] = loadImage( "lava1.png" );
   lava[1] = loadImage( "lava2.png" );
   lava[2] = loadImage( "lava3.png" );
@@ -80,6 +82,11 @@ void loadWorld(PImage img) {
   goomba[0].resize(gridSize, gridSize);
   goomba[1]=loadImage("goomba1.png");
   goomba[1].resize(gridSize, gridSize);
+  Tb=new PImage[2];
+  Tb[0]=loadImage("thwomp0.png");
+  Tb[0].resize(gridSize*2, gridSize*2);
+  Tb[1]=loadImage("thwomp1.png");
+  Tb[1].resize(gridSize*2, gridSize*2);
   world=new FWorld(-1000, -1000, 3000, 3000);
   world.setGravity(0, 900);
 
@@ -95,7 +102,8 @@ void loadWorld(PImage img) {
         b.setName("stone");
         world.add(b);
       }
-      if (c==wallgray) {println("b");
+      if (c==wallgray) {
+        println("b");
         b.attachImage(stone);
         b.setFriction(4);
         b.setName("wall");
@@ -155,6 +163,11 @@ void loadWorld(PImage img) {
       }
       if (c==gumbayellow) {
         FGoomba gmb=new FGoomba(x*gridSize, y*gridSize);
+        enemies.add(gmb);
+        world.add(gmb);
+      }
+      if (c==tbgreen) {
+        FTb gmb=new FTb(x*gridSize*2, y*gridSize*2);
         enemies.add(gmb);
         world.add(gmb);
       }
