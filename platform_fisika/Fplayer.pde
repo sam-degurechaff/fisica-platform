@@ -35,12 +35,12 @@ class FPlayer extends FGameObject {
     if (abs(vy)<.1)action=idle;
     if (akey) {
       action=run;
-      setVelocity(-300, vy);
+      setVelocity(-200, vy);
       direction=L;
     }
     if (dkey) {
       action=run;
-      setVelocity(300, vy);
+      setVelocity(200, vy);
       direction=R;
     }
     //  if (wkey)setVelocity(vx, -500);

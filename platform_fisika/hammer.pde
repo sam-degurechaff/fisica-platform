@@ -1,26 +1,28 @@
-class FTb extends FGameObject {
+class FHammer extends FGameObject {
   int direction=L;
   int speed=50;
   int frame=0;
-  FTb(float x, float y) {
-    super(gridSize*2, gridSize*2);
-    setPosition(x+gridSize/2, y+gridSize/2);
-    // println(x, y);
-    setName("thwomp");
+  FHammer(float x, float y) {
+    super();
+    setPosition(x, y);
+    setName("hammer");
     setRotatable(false);
-    attachImage(Tb[frameCount%2]);
-    setStatic(true);
+    attachImage(hammerbro[frameCount%2]);
   }
   void act() {
     //attachImage( goomba[frameCount%2]);
     animate();
     checkForCollisions();
-    // move();
+    move();
   }
   void animate() {
     //println(frame);
     if (frame>=goomba.length)frame=0;
-    if (player.getX()<getX()+gridSize/2&&player.getX()>getX()-gridSize/2)setStatic(false);
+    if (frameCount%5==0) {
+      if (direction==R) attachImage(goomba[frame]);
+      else  attachImage(reverseImage(goomba[frame]));
+      frame++;
+    }
   }
 
   void checkForCollisions() {
@@ -34,8 +36,11 @@ class FTb extends FGameObject {
         break;
       }
       if (fc.contains("player")) {
-        if (player.getY()>getY()-gridSize/2+30) {
-
+        if (player.getY()<getY()-gridSize/2) {
+          world.remove(this);
+          enemies.remove(this);
+          player.setVelocity(player.getVelocityX(), -300);
+        } else {
           player.setPosition(0, 0);
         }
       }

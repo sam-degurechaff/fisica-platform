@@ -167,7 +167,7 @@ void loadWorld(PImage img) {
         world.add(gmb);
       }
       if (c==tbgreen) {
-        FTb gmb=new FTb(x*gridSize*2, y*gridSize*2);
+        FTb gmb=new FTb(x*gridSize, y*gridSize);
         enemies.add(gmb);
         world.add(gmb);
       }
