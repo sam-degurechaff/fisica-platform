@@ -17,7 +17,7 @@ class FGoomba extends FGameObject {
   }
   void animate() {
     //println(frame);
-    if (frame>=goomba.length)frame=0;
+    if (frame>=hammerbro.length)frame=0;
     if (frameCount%5==0) {
       if (direction==R) attachImage(goomba[frame]);
       else  attachImage(reverseImage(goomba[frame]));

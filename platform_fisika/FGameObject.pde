@@ -5,7 +5,7 @@ class FGameObject extends FBox {
     super(gridSize, gridSize);
   }
   FGameObject(int w, int h) {
-    super(gridSize, gridSize);
+    super(gridSize*2, gridSize*2);
   }
   void act() {
   }

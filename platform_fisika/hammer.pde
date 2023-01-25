@@ -14,13 +14,15 @@ class FHammer extends FGameObject {
     animate();
     checkForCollisions();
     move();
+    hammer();
   }
   void animate() {
     //println(frame);
-    if (frame>=goomba.length)frame=0;
-    if (frameCount%5==0) {
-      if (direction==R) attachImage(goomba[frame]);
-      else  attachImage(reverseImage(goomba[frame]));
+    if (frame>=hammerbro.length)frame=0;
+    //if(frame==2)hammer.add;
+    if (frameCount%2==0) {
+      if (direction==R) attachImage(hammerbro[frame]);
+      else  attachImage(reverseImage(hammerbro[frame]));
       frame++;
     }
   }
@@ -49,5 +51,18 @@ class FHammer extends FGameObject {
   void move() {
     float vy=getVelocityY();
     setVelocity(speed*direction, vy);
+  }
+  void hammer() {
+    FBox b=new FBox(gridSize, gridSize);
+    float x=getX();
+    float y = getY();
+    b.setPosition(x, y);
+    b.attachImage(hammer_obj);
+    b.setFriction(4);
+    b.setName("hammer");
+
+    b.setSensor(true);
+
+    if (frame==2)world.add(b);
   }
 }

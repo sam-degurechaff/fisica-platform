@@ -19,8 +19,9 @@ color lavared=#D61500;
 color gumbayellow=#FADD00;
 color wallgray=#797979;
 color tbgreen=#87FF00;
+color hammerbule=#0520FF;
 
-PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, lava1, bridge, trampoline, gmb, thwomp;
+PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, lava1, bridge, trampoline, gmb, thwomp, hammer_obj;
 int gridSize=28;
 boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey, jph, de;
 FWorld world ;
@@ -28,13 +29,14 @@ FPlayer player;
 ArrayList<FGameObject>terrain;
 ArrayList<FGameObject>enemies;
 PImage[] lava = new PImage[6];
-int f;
+int f, hs;
 PImage[] idle;
 PImage[] jump;
 PImage[] run;
 PImage[] action;
 PImage[]goomba=new PImage[2];
 PImage[]Tb=new PImage[2];
+PImage[]hammerbro=new PImage[2];
 
 
 
@@ -59,7 +61,8 @@ void loadWorld(PImage img) {
   treetopi=loadImage("tree_intersect.png");
   bridge=loadImage("bridge_center.png");
   trampoline=loadImage("trampoline.png");
- 
+  hammer_obj=loadImage("hammer.png");
+
   lava[0] = loadImage( "lava1.png" );
   lava[1] = loadImage( "lava2.png" );
   lava[2] = loadImage( "lava3.png" );
@@ -87,6 +90,13 @@ void loadWorld(PImage img) {
   Tb[0].resize(gridSize*2, gridSize*2);
   Tb[1]=loadImage("thwomp1.png");
   Tb[1].resize(gridSize*2, gridSize*2);
+
+  hammerbro=new PImage[2];
+  hammerbro[0]=loadImage("hammerbro0.png");
+  hammerbro[0].resize(gridSize, gridSize);
+  hammerbro[1]=loadImage("hammerbro1.png");
+  hammerbro[1].resize(gridSize, gridSize);
+
   world=new FWorld(-1000, -1000, 3000, 3000);
   world.setGravity(0, 900);
 
@@ -168,6 +178,11 @@ void loadWorld(PImage img) {
       }
       if (c==tbgreen) {
         FTb gmb=new FTb(x*gridSize, y*gridSize);
+        enemies.add(gmb);
+        world.add(gmb);
+      }
+      if (c==hammerbule) {
+        FHammer gmb=new FHammer(x*gridSize, y*gridSize);
         enemies.add(gmb);
         world.add(gmb);
       }
