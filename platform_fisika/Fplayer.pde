@@ -65,6 +65,11 @@ class FPlayer extends FGameObject {
         setPosition(5, 0);
         setVelocity(0, 0);
       }
+      if (fc.contains("hammer")) {
+
+        setPosition(5, 0);
+        setVelocity(0, 0);
+      }
     }
   }
 }

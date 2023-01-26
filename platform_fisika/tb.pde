@@ -20,7 +20,10 @@ class FTb extends FGameObject {
   void animate() {
     //println(frame);
     if (frame>=goomba.length)frame=0;
-    if (player.getX()<getX()+gridSize/2&&player.getX()>getX()-gridSize/2)setStatic(false);
+    if (player.getX()<getX()+gridSize/2&&player.getX()>getX()-gridSize/2) {
+      setStatic(false);
+      attachImage(Tb[1]);
+    }
   }
 
   void checkForCollisions() {

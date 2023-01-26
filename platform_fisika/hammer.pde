@@ -2,6 +2,7 @@ class FHammer extends FGameObject {
   int direction=L;
   int speed=50;
   int frame=0;
+  int t=8;
   FHammer(float x, float y) {
     super();
     setPosition(x, y);
@@ -56,13 +57,25 @@ class FHammer extends FGameObject {
     FBox b=new FBox(gridSize, gridSize);
     float x=getX();
     float y = getY();
+    int hs;
     b.setPosition(x, y);
+    if (x>player.getX())hs=-1;
+    else {
+      hs=1;
+    }
     b.attachImage(hammer_obj);
     b.setFriction(4);
+    b.setVelocity(hs*20, -400);
     b.setName("hammer");
 
     b.setSensor(true);
 
-    if (frame==2)world.add(b);
+    t--;
+    if (t==0) {
+      world.add(b);
+
+      t=30;
+      
+    }
   }
 }
