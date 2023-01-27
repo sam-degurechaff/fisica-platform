@@ -20,8 +20,9 @@ color gumbayellow=#FADD00;
 color wallgray=#797979;
 color tbgreen=#87FF00;
 color hammerbule=#0520FF;
+color shooterred=#E80E0E;
 
-PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, lava1, bridge, trampoline, gmb, thwomp, hammer_obj;
+PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, lava1, bridge, trampoline, gmb, thwomp, hammer_obj, bullet;
 int gridSize=28;
 boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey, jph, de;
 FWorld world ;
@@ -37,6 +38,8 @@ PImage[] action;
 PImage[]goomba=new PImage[2];
 PImage[]Tb=new PImage[2];
 PImage[]hammerbro=new PImage[2];
+PImage[]shooter_run=new PImage[14];
+PImage[]shooter_shoot=new PImage[14];
 
 
 
@@ -62,6 +65,8 @@ void loadWorld(PImage img) {
   bridge=loadImage("bridge_center.png");
   trampoline=loadImage("trampoline.png");
   hammer_obj=loadImage("hammer.png");
+  bullet=loadImage("bullet1.png");
+
 
   lava[0] = loadImage( "lava1.png" );
   lava[1] = loadImage( "lava2.png" );
@@ -97,6 +102,65 @@ void loadWorld(PImage img) {
   hammerbro[1]=loadImage("hammerbro1.png");
   hammerbro[1].resize(gridSize, gridSize);
 
+  shooter_run=new PImage[14];
+  shooter_run[0]=loadImage("metal-slug-run-cyle-0.png");
+  shooter_run[0].resize(gridSize, gridSize);
+  shooter_run[1]=loadImage("metal-slug-run-cyle-1.png");
+  shooter_run[1].resize(gridSize, gridSize);
+  shooter_run[2]=loadImage("metal-slug-run-cyle-2.png");
+  shooter_run[2].resize(gridSize, gridSize);
+  shooter_run[3]=loadImage("metal-slug-run-cyle-3.png");
+  shooter_run[3].resize(gridSize, gridSize);
+  shooter_run[4]=loadImage("metal-slug-run-cyle-4.png");
+  shooter_run[4].resize(gridSize, gridSize);
+  shooter_run[5]=loadImage("metal-slug-run-cyle-5.png");
+  shooter_run[5].resize(gridSize, gridSize);
+  shooter_run[6]=loadImage("metal-slug-run-cyle-6.png");
+  shooter_run[6].resize(gridSize, gridSize);
+  shooter_run[7]=loadImage("metal-slug-run-cyle-7.png");
+  shooter_run[7].resize(gridSize, gridSize);
+  shooter_run[8]=loadImage("metal-slug-run-cyle-8.png");
+  shooter_run[8].resize(gridSize, gridSize);
+  shooter_run[9]=loadImage("metal-slug-run-cyle-9.png");
+  shooter_run[9].resize(gridSize, gridSize);
+  shooter_run[10]=loadImage("metal-slug-run-cyle-10.png");
+  shooter_run[10].resize(gridSize, gridSize);
+  shooter_run[11]=loadImage("metal-slug-run-cyle-11.png");
+  shooter_run[11].resize(gridSize, gridSize);
+  shooter_run[12]=loadImage("metal-slug-run-cyle-12.png");
+  shooter_run[12].resize(gridSize, gridSize);
+  shooter_run[13]=loadImage("metal-slug-run-cyle-13.png");
+  shooter_run[13].resize(gridSize, gridSize);
+  
+  PImage[]shooter_shoot=new PImage[14];
+  shooter_shoot[0]=loadImage("shoot cycle-0.png");
+  shooter_shoot[0].resize(gridSize, gridSize);
+  shooter_shoot[1]=loadImage("shoot cycle-1.png");
+  shooter_shoot[1].resize(gridSize, gridSize);
+  shooter_shoot[2]=loadImage("shoot cycle-2.png");
+  shooter_shoot[2].resize(gridSize, gridSize);
+  shooter_shoot[3]=loadImage("shoot cycle-3.png");
+  shooter_shoot[3].resize(gridSize, gridSize);
+  shooter_shoot[4]=loadImage("shoot cycle-4.png");
+  shooter_shoot[4].resize(gridSize, gridSize);
+  shooter_shoot[5]=loadImage("shoot cycle-5.png");
+  shooter_shoot[5].resize(gridSize, gridSize);
+  shooter_shoot[6]=loadImage("shoot cycle-6.png");
+  shooter_shoot[6].resize(gridSize, gridSize);
+  shooter_shoot[7]=loadImage("shoot cycle-7.png");
+  shooter_shoot[7].resize(gridSize, gridSize);
+  shooter_shoot[8]=loadImage("shoot cycle-8.png");
+  shooter_shoot[8].resize(gridSize, gridSize);
+  shooter_shoot[9]=loadImage("shoot cycle-9.png");
+  shooter_shoot[9].resize(gridSize, gridSize);
+  shooter_shoot[10]=loadImage("shoot cycle-10.png");
+  shooter_shoot[10].resize(gridSize, gridSize);
+  shooter_shoot[11]=loadImage("shoot cycle-11.png");
+  shooter_shoot[11].resize(gridSize, gridSize);
+  shooter_shoot[12]=loadImage("shoot cycle-12.png");
+  shooter_shoot[12].resize(gridSize, gridSize);
+  shooter_shoot[13]=loadImage("metal-slug-run-cyle-13.png");
+  shooter_shoot[13].resize(gridSize, gridSize);
   world=new FWorld(-1000, -1000, 3000, 3000);
   world.setGravity(0, 900);
 
@@ -183,6 +247,11 @@ void loadWorld(PImage img) {
       }
       if (c==hammerbule) {
         FHammer gmb=new FHammer(x*gridSize, y*gridSize);
+        enemies.add(gmb);
+        world.add(gmb);
+      }
+      if (c==shooterred) {
+        FShooter gmb=new FShooter(x*gridSize, y*gridSize);
         enemies.add(gmb);
         world.add(gmb);
       }
