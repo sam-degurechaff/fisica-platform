@@ -4,7 +4,7 @@ class FShooter extends FGameObject {
   int frame=0;
   int t;
   FShooter(float x, float y) {
-    super(gridSize*2, gridSize*2);
+    super(gridSize, gridSize);
     setPosition(x, y);
     setName("shooter");
     setRotatable(false);
@@ -19,16 +19,13 @@ class FShooter extends FGameObject {
   }
   void animate() {
     //println(frame);
-    float pd=player.getX();
-    float sd=getX();
-    float ra=sd-pd;
-    if (frame>=shooter_run.length)frame=0;
+    //float pd=player.getX();
+    //float sd=getX();
+    //float ra=sd-pd;
+    if (frame>=shooter_shoot.length)frame=0;
     if (frameCount%14==0) {
-      if (direction==R) attachImage(shooter_run[frame]);
-      else  attachImage(reverseImage(shooter_run[frame]));
-      frame++;
-      if (direction==R||pd<sd&&ra<80) attachImage(shooter_shoot[frame]);
-      if (direction==L||pd>sd&&ra<80)  attachImage(reverseImage(shooter_shoot[frame]));
+      if (direction==R) attachImage(shooter_shoot[frame]);
+      else  attachImage(reverseImage(shooter_shoot[frame]));
       frame++;
     }
   }
@@ -70,8 +67,8 @@ class FShooter extends FGameObject {
       hs=1;
     }
     b.attachImage(bullet);
-
-    b.setVelocity(hs*300, -10);
+    //b.resize(gridSize*2, gridSize*2);
+    b.setVelocity(hs*500, -10);
     b.setName("hammer");
 
     b.setSensor(true);
