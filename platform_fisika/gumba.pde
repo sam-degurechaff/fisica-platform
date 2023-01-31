@@ -44,6 +44,7 @@ class FGoomba extends FGameObject {
           player.setPosition(0, 0);
         }
       }
+      if (fc.contains("player_hammer"))world.remove(this);
     }
   }
   void move() {

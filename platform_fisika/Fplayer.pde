@@ -1,4 +1,5 @@
 class FPlayer extends FGameObject {
+  int timer=20;
   int frame, direction;
   final int L=-1;
   final int R=1;
@@ -53,7 +54,14 @@ class FPlayer extends FGameObject {
 
     if (abs(vy)>.1)action=jump;
     if (jph==true) setVelocity(vx, -900);
-    if (de==true)setPosition(30, 0);
+    if (de==true&&inv==false)setPosition(30, 0);
+    if (inv==true) {
+      timer=timer--;
+      if (timer<=0) {
+        inv=false;
+        timer=20;
+      }
+    }
   }
   void checkForCollisions() {
     ArrayList<FContact>contacts=getContacts();
@@ -70,6 +78,8 @@ class FPlayer extends FGameObject {
         setPosition(5, 0);
         setVelocity(0, 0);
       }
+
+      if (fc.contains("php"))ph=true;
     }
   }
 }

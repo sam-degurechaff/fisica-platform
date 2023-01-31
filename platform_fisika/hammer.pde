@@ -47,6 +47,7 @@ class FHammer extends FGameObject {
           player.setPosition(0, 0);
         }
       }
+      if (fc.contains("player_hammer"))world.remove(this);
     }
   }
   void move() {
@@ -75,7 +76,6 @@ class FHammer extends FGameObject {
       world.add(b);
 
       t=30;
-      
     }
   }
 }

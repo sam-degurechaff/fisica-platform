@@ -21,10 +21,12 @@ color wallgray=#797979;
 color tbgreen=#87FF00;
 color hammerbule=#0520FF;
 color shooterred=#E80E0E;
+color pwred=#E00000;
+color pwyellow=#E0BB00;
 
 PImage map, stone, spike, ice, treeTrunk, img, treetopc, treetopi, lava1, bridge, trampoline, gmb, thwomp, hammer_obj, bullet;
 int gridSize=28;
-boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey, jph, de;
+boolean wkey, akey, skey, dkey, upkey, downkey, rightkey, leftkey, jph, ph, inv, de;
 FWorld world ;
 FPlayer player;
 ArrayList<FGameObject>terrain;
@@ -131,8 +133,9 @@ void loadWorld(PImage img) {
   shooter_run[12].resize(gridSize, gridSize);
   shooter_run[13]=loadImage("metal-slug-run-cyle-13.png");
   shooter_run[13].resize(gridSize, gridSize);
-  
+
   PImage[]shooter_shoot=new PImage[14];
+  
   shooter_shoot[0]=loadImage("shoot cycle-0.png");
   shooter_shoot[0].resize(gridSize*2, gridSize*2);
   shooter_shoot[1]=loadImage("shoot cycle-1.png");
@@ -161,6 +164,7 @@ void loadWorld(PImage img) {
   shooter_shoot[12].resize(gridSize*2, gridSize*2);
   shooter_shoot[13]=loadImage("shoot cycle-13.png");
   shooter_shoot[13].resize(gridSize*2, gridSize*2);
+  
   world=new FWorld(-1000, -1000, 3000, 3000);
   world.setGravity(0, 900);
 
@@ -177,7 +181,7 @@ void loadWorld(PImage img) {
         world.add(b);
       }
       if (c==wallgray) {
-        println("b");
+       //println("b");
         b.attachImage(stone);
         b.setFriction(4);
         b.setName("wall");
@@ -255,6 +259,16 @@ void loadWorld(PImage img) {
         enemies.add(gmb);
         world.add(gmb);
       }
+      if (c==pwred) {
+        FBeserk br=new FBeserk(x*gridSize, y*gridSize);
+        terrain.add(br);
+        world.add(br);
+      }
+      if (c==pwyellow) {
+        FBeserk br=new FBeserk(x*gridSize, y*gridSize);
+        terrain.add(br);
+        world.add(br);
+      }
     }
   }
 }
@@ -264,11 +278,13 @@ void loadPlayer() {
 }
 void draw() {
   background(255);
+  
   //world.step();
   //world.draw();
   player.act();
   drawWorld();
   actWorld();
+  println(shooter_shoot[1]);
   //println(player.getX(), player.getY());
 }
 

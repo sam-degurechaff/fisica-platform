@@ -22,10 +22,13 @@ class FShooter extends FGameObject {
     //float pd=player.getX();
     //float sd=getX();
     //float ra=sd-pd;
+    
     if (frame>=shooter_shoot.length)frame=0;
     if (frameCount%14==0) {
-      if (direction==R) attachImage(shooter_shoot[frame]);
-      else  attachImage(reverseImage(shooter_shoot[frame]));
+
+      attachImage(shooter_shoot[frame]);
+
+      //else  attachImage(reverseImage(shooter_shoot[frame]));
       frame++;
     }
   }
